@@ -1,0 +1,86 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg
+
+# Virtual environments
+venv/
+venv311/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+*.env
+
+# Logs
+logs/*.log
+logs/*.txt
+*.log
+
+# Data files (depending on size/sensitivity)
+data/audio/*
+data/pdfs/*
+# Keep the directories but ignore their contents
+!data/audio/.gitkeep
+!data/pdfs/.gitkeep
+
+# Model cache and downloads
+models/
+*.pt
+*.pth
+*.bin
+*.onnx
+.cache/
+
+# Hugging Face cache
+.huggingface/
+
+# Vector store data
+*.faiss
+*.pkl
+*.pickle
+vectorstore/data/*
+!vectorstore/data/.gitkeep
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
