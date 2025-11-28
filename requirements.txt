@@ -1,0 +1,10 @@
+pymupdf
+pdfplumber
+openai-whisper
+sentence-transformers
+chromadb
+ollama
+langchain-text-splitters
+python-dotenv
+tqdm
+numpy<2.0
