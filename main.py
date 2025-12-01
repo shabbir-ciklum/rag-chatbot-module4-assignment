@@ -108,9 +108,9 @@ def main():
     print("="*60)
     
     test_questions = [
-        "What are the production 'Do's' for RAG?",
-        "What is the difference between standard retrieval and the ColPali approach?",
-        "Why is hybrid search better than vector-only search?"
+        "What are top threats in Agentic AI based solutions to look out for?",
+        "Summarise the top controls outlined in CIS benchmark guide v8.1.2?",
+        "What is new with Q business from latest AWS Summit London 2025 ?"
     ]
     
     for i, question in enumerate(test_questions, 1):
