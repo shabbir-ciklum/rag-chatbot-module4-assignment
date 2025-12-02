@@ -36,7 +36,7 @@ brew install ffmpeg
 ### 2. Create Virtual Environment
 
 ```bash
-python3.14 -m venv venv
+python3.11 -m venv venv
 ```
 
 Or use your preferred Python version:
