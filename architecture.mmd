@@ -1,0 +1,75 @@
+graph TB
+    User[👤 User Query] --> Agent[🤖 AI Agent Orchestrator]
+    
+    Agent --> Reasoner[💭 Reasoner<br/>Self-Reflection & Planning]
+    Agent --> Tools[🔧 Agent Tools]
+    Agent --> RAG[📚 RAG Pipeline]
+    Agent --> Evaluator[📊 Evaluator<br/>Performance Metrics]
+    
+    %% ---------------------- REASONING LAYER ----------------------
+    subgraph Reasoning_Layer [Reasoning Layer]
+        Reasoner --> QueryClassification[🧪 Query Classification]
+        Reasoner --> ToolSelection[🛠️ Tool Selection]
+        Reasoner --> Reflection[🔁 Self-Reflection]
+        Reasoner --> Confidence[📏 Confidence Estimation]
+    end
+    
+    %% ---------------------- RAG PIPELINE ----------------------
+    subgraph RAG_Pipeline [RAG Pipeline]
+        RAG --> VectorStore[(🗄️ ChromaDB<br/>Vector Store)]
+        RAG --> Embeddings[🔢 Sentence<br/>Transformers]
+        RAG --> Retrieval[🔍 Semantic Search]
+        
+        DataLoaders[📥 Data Loaders] --> VectorStore
+        PDFLoader[📄 PDF Loader] --> DataLoaders
+        AudioLoader[🎵 Audio Loader<br/>Whisper] --> DataLoaders
+        
+        DataLoaders --> Chunker[✂️ Semantic Chunker]
+        Chunker --> VectorStore
+    end
+
+    %% ---------------------- TOOL SYSTEM ----------------------
+    subgraph Tool_System [Tool System]
+        Tools --> CodeAnalyzer[📝 Code Analyzer<br/>AST Parsing]
+        Tools --> DocGenerator[📋 Doc Generator]
+        Tools --> PostCreator[✍️ LinkedIn Post Creator]
+        Tools --> ArchAnalyzer[🏗️ Architecture Analyzer]
+        Tools --> StatsCollector[📊 Stats Collector]
+    end
+    
+    %% ---------------------- LLM PROVIDERS ----------------------
+    subgraph LLM_Providers [LLM Providers]
+        Agent --> LLMProvider[🧠 LLM Provider<br/>Interface]
+        LLMProvider --> Ollama[🦙 Ollama<br/>Local]
+        LLMProvider --> Groq[⚡ Groq<br/>Cloud API]
+        LLMProvider --> Gemini[✨ Google Gemini<br/>API]
+    end
+    
+    %% ---------------------- EVALUATION ----------------------
+    subgraph Evaluation_Metrics [Evaluation & Metrics]
+        Evaluator --> RetrievalMetrics[📈 Retrieval<br/>Accuracy]
+        Evaluator --> RelevanceMetrics[🎯 Response<br/>Relevance]
+        Evaluator --> ToolMetrics[🔧 Tool Selection<br/>Accuracy]
+        Evaluator --> ReasoningMetrics[💡 Reasoning<br/>Quality]
+    end
+    
+    %% ---------------------- OUTPUT FLOWS ----------------------
+    Reasoner --> Response[💬 Generated Response]
+    Tools --> Response
+    RAG --> Response
+    
+    Response --> Reflection
+    Reflection --> FinalResponse[✅ Final Response<br/>with Metadata]
+    
+    Evaluator --> PerformanceReport[📊 Performance<br/>Report]
+    
+    FinalResponse --> User
+    PerformanceReport --> Reports[(📁 Reports &<br/>Logs)]
+    
+    %% ---------------------- STYLES ----------------------
+    style Agent fill:#e1f5ff,stroke:#01579b,stroke-width:3px
+    style Reasoner fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    style Tools fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    style RAG fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
+    style Evaluator fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+    style LLMProvider fill:#e0f2f1,stroke:#004d40,stroke-width:2px

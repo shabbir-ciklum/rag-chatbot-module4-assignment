@@ -45,6 +45,16 @@ logs/*.log
 logs/*.txt
 *.log
 
+# Reports and generated content
+reports/
+linkedin_post.txt
+
+# Demo files (personal reference only)
+DEMO_SCRIPT.md
+DEMO_QUICK_REFERENCE.md
+PRE_RECORDING_CHECKLIST.md
+DEMO_COMMANDS.txt
+
 # Data files (depending on size/sensitivity)
 data/audio/*
 data/pdfs/*
