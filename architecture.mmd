@@ -1,75 +1,89 @@
-graph TB
-    User[👤 User Query] --> Agent[🤖 AI Agent Orchestrator]
-    
-    Agent --> Reasoner[💭 Reasoner<br/>Self-Reflection & Planning]
-    Agent --> Tools[🔧 Agent Tools]
-    Agent --> RAG[📚 RAG Pipeline]
-    Agent --> Evaluator[📊 Evaluator<br/>Performance Metrics]
-    
+graph TD
+    User[👤 User Query] -->|"Input: User Question"| Agent[🤖 AI Agent Orchestrator]
+
+    %% ---------------------- MAIN FLOW ----------------------
+    Agent -->|"Step 1: Analyze Query"| Reasoner[💭 Reasoner]
+    Agent -->|"Step 2: Retrieve Context"| RAG[📚 RAG Pipeline]
+    Agent -->|"Step 3: Execute Tools"| Tools[🔧 Agent Tools]
+    Agent -->|"Step 4: Generate Response"| LLMProvider[🧠 LLM Provider]
+    Agent -->|"Step 6: Evaluate"| Evaluator[📊 Evaluator]
+
     %% ---------------------- REASONING LAYER ----------------------
-    subgraph Reasoning_Layer [Reasoning Layer]
-        Reasoner --> QueryClassification[🧪 Query Classification]
-        Reasoner --> ToolSelection[🛠️ Tool Selection]
-        Reasoner --> Reflection[🔁 Self-Reflection]
-        Reasoner --> Confidence[📏 Confidence Estimation]
+    subgraph Reasoning["🧠 Reasoning & Planning"]
+        Reasoner -->|"1a"| QueryClassification[Query Classification]
+        Reasoner -->|"1b"| ToolSelection[Tool Selection]
+        Reasoner -->|"1c"| Reflection[Self-Reflection]
+        Reasoner -->|"1d"| Confidence[Confidence Estimation]
     end
-    
+
     %% ---------------------- RAG PIPELINE ----------------------
-    subgraph RAG_Pipeline [RAG Pipeline]
-        RAG --> VectorStore[(🗄️ ChromaDB<br/>Vector Store)]
-        RAG --> Embeddings[🔢 Sentence<br/>Transformers]
-        RAG --> Retrieval[🔍 Semantic Search]
-        
-        DataLoaders[📥 Data Loaders] --> VectorStore
-        PDFLoader[📄 PDF Loader] --> DataLoaders
-        AudioLoader[🎵 Audio Loader<br/>Whisper] --> DataLoaders
-        
-        DataLoaders --> Chunker[✂️ Semantic Chunker]
-        Chunker --> VectorStore
+    subgraph RAG_System["📚 Knowledge Retrieval System"]
+        direction TB
+        RAG -->|"2a: Query Embedding"| Embeddings[🔢 Embeddings<br/>all-MiniLM-L6-v2]
+        Embeddings -->|"2b: Search"| VectorStore[(🗄️ ChromaDB<br/>Vector Store)]
+        VectorStore -->|"2c: Top-K Results"| Retrieval[🔍 Semantic Search]
+
+        subgraph Data_Pipeline["📥 Data Ingestion"]
+            direction LR
+            PDFLoader[📄 PDF Loader] -->|"Extract Text"| Chunker[✂️ Semantic<br/>Chunker]
+            AudioLoader[🎵 Audio Loader<br/>Whisper] -->|"Transcribe"| Chunker
+            Chunker -->|"Store Embeddings"| VectorStore
+        end
     end
 
     %% ---------------------- TOOL SYSTEM ----------------------
-    subgraph Tool_System [Tool System]
-        Tools --> CodeAnalyzer[📝 Code Analyzer<br/>AST Parsing]
-        Tools --> DocGenerator[📋 Doc Generator]
-        Tools --> PostCreator[✍️ LinkedIn Post Creator]
-        Tools --> ArchAnalyzer[🏗️ Architecture Analyzer]
-        Tools --> StatsCollector[📊 Stats Collector]
+    subgraph Tool_System["🔧 Agent Tools"]
+        direction TB
+        Tools -->|"3a"| T1[Code Analyzer]
+        Tools -->|"3b"| T2[Doc Generator]
+        Tools -->|"3c"| T3[Post Creator]
+        Tools -->|"3d"| T4[Arch Analyzer]
+        Tools -->|"3e"| T5[Stats Collector]
     end
-    
+
     %% ---------------------- LLM PROVIDERS ----------------------
-    subgraph LLM_Providers [LLM Providers]
-        Agent --> LLMProvider[🧠 LLM Provider<br/>Interface]
-        LLMProvider --> Ollama[🦙 Ollama<br/>Local]
-        LLMProvider --> Groq[⚡ Groq<br/>Cloud API]
-        LLMProvider --> Gemini[✨ Google Gemini<br/>API]
+    subgraph LLM_Layer["🤖 LLM Layer"]
+        direction TB
+        LLMProvider -->|"4a: Use Model"| Ollama[🦙 Ollama<br/>Local]
+        LLMProvider -->|"4b: Use Model"| Groq[⚡ Groq<br/>Cloud API]
+        LLMProvider -->|"4c: Use Model"| Gemini[✨ Gemini<br/>API]
     end
-    
+
     %% ---------------------- EVALUATION ----------------------
-    subgraph Evaluation_Metrics [Evaluation & Metrics]
-        Evaluator --> RetrievalMetrics[📈 Retrieval<br/>Accuracy]
-        Evaluator --> RelevanceMetrics[🎯 Response<br/>Relevance]
-        Evaluator --> ToolMetrics[🔧 Tool Selection<br/>Accuracy]
-        Evaluator --> ReasoningMetrics[💡 Reasoning<br/>Quality]
+    subgraph Evaluation["📊 Performance Evaluation"]
+        direction TB
+        Evaluator -->|"6a"| E1[Retrieval<br/>Accuracy]
+        Evaluator -->|"6b"| E2[Response<br/>Relevance]
+        Evaluator -->|"6c"| E3[Tool<br/>Accuracy]
+        Evaluator -->|"6d"| E4[Reasoning<br/>Quality]
     end
-    
-    %% ---------------------- OUTPUT FLOWS ----------------------
-    Reasoner --> Response[💬 Generated Response]
-    Tools --> Response
-    RAG --> Response
-    
-    Response --> Reflection
-    Reflection --> FinalResponse[✅ Final Response<br/>with Metadata]
-    
-    Evaluator --> PerformanceReport[📊 Performance<br/>Report]
-    
-    FinalResponse --> User
-    PerformanceReport --> Reports[(📁 Reports &<br/>Logs)]
-    
-    %% ---------------------- STYLES ----------------------
-    style Agent fill:#e1f5ff,stroke:#01579b,stroke-width:3px
-    style Reasoner fill:#fff3e0,stroke:#e65100,stroke-width:2px
-    style Tools fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
-    style RAG fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
-    style Evaluator fill:#fce4ec,stroke:#880e4f,stroke-width:2px
-    style LLMProvider fill:#e0f2f1,stroke:#004d40,stroke-width:2px
+
+    %% ---------------------- RESPONSE FLOW ----------------------
+    Reasoner -->|"Reasoning Context"| ResponseGen[💬 Response Generation]
+    RAG -->|"Retrieved Docs"| ResponseGen
+    Tools -->|"Tool Results"| ResponseGen
+    LLMProvider -->|"LLM Output"| ResponseGen
+
+    ResponseGen -->|"Step 5: Self-Reflect"| Reflection
+    Reflection -->|"Quality Score"| FinalResponse[✅ Final Response]
+    Evaluator -->|"Metrics"| PerformanceReport[📈 Performance Report]
+
+    FinalResponse -->|"Output: Answer + Sources"| User
+    PerformanceReport -->|"Save Metrics"| Reports[(📁 Reports & Logs)]
+
+    %% ---------------------- STYLES (Theme-Friendly) ----------------------
+    classDef agent fill:#3b82f6,stroke:#1e40af,stroke-width:3px,color:#fff
+    classDef reasoning fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#000
+    classDef tools fill:#a855f7,stroke:#7e22ce,stroke-width:2px,color:#fff
+    classDef rag fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    classDef evaluator fill:#ec4899,stroke:#be185d,stroke-width:2px,color:#fff
+    classDef llm fill:#14b8a6,stroke:#0d9488,stroke-width:2px,color:#fff
+    classDef output fill:#eab308,stroke:#ca8a04,stroke-width:2px,color:#000
+
+    class Agent agent
+    class Reasoner,QueryClassification,ToolSelection,Reflection,Confidence reasoning
+    class Tools,T1,T2,T3,T4,T5 tools
+    class RAG,VectorStore,Embeddings,Retrieval,PDFLoader,AudioLoader,Chunker rag
+    class Evaluator,E1,E2,E3,E4 evaluator
+    class LLMProvider,Ollama,Groq,Gemini llm
+    class FinalResponse,PerformanceReport,Reports output

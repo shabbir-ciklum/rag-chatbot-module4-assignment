@@ -103,15 +103,15 @@ class RAGChatbot:
                 print(f"\nAssistant: {result['answer']}")
                 
                 if result.get("sources"):
-                    print("\n📚 Sources:")
+                    print("\n Sources:")
                     for i, source in enumerate(result["sources"][:3], 1):
                         print(f"  {i}. {source['source']} (Page {source.get('page', 'N/A')}, Score: {source['score']:.3f})")
                 
             except KeyboardInterrupt:
-                print("\n\nGoodbye! 👋")
+                print("\n\nGoodbye! ")
                 break
             except Exception as e:
-                print(f"\n❌ Error: {e}")
+                print(f"\n Error: {e}")
     
     def _handle_command(self, command: str):
         """Handle special commands in interactive mode."""
@@ -120,46 +120,46 @@ class RAGChatbot:
         args = parts[1] if len(parts) > 1 else ""
         
         if not self.agent:
-            print("❌ Agent capabilities not available. Please run with agent enabled.")
+            print(" Agent capabilities not available. Please run with agent enabled.")
             return
         
         if cmd == '/agent':
             if not args:
-                print("❌ Please provide a query after /agent")
+                print(" Please provide a query after /agent")
                 return
             
-            print("\n🤖 Using full agent capabilities...\n")
+            print("\n Using full agent capabilities...\n")
             result = self.get_full_response(args, use_agent=True)
             
             print(f"\nAssistant: {result['answer']}")
             
             if result.get("reflection"):
-                print(f"\n🪞 Reflection:")
+                print(f"\n Reflection:")
                 print(f"   Quality Score: {result['reflection']['quality_score']:.2f}")
                 if result['reflection'].get('strengths'):
                     print(f"   Strengths: {', '.join(result['reflection']['strengths'])}")
             
             if result.get("evaluation"):
-                print(f"\n📊 Evaluation:")
+                print(f"\n Evaluation:")
                 print(f"   Overall Score: {result['evaluation']['overall_score']:.2f}")
         
         elif cmd == '/analyze':
-            print("\n🔍 Performing self-analysis...\n")
+            print("\n Performing self-analysis...\n")
             analysis = self.agent.analyze_self()
             
-            print("\n📊 Statistics:")
+            print("\n Statistics:")
             stats = analysis["stats"]
             print(f"   Total Files: {stats['total_files']}")
             print(f"   Python Files: {stats['python_files']}")
             print(f"   Total Lines: {stats['total_lines']:,}")
             
-            print("\n🏗️  Architecture:")
+            print("\n  Architecture:")
             arch = analysis["architecture"]
             print(f"   Type: {arch['architecture_type']}")
             print(f"   Layers: {', '.join(arch['layers'].keys())}")
         
         elif cmd == '/report':
-            print("\n📈 Performance Report:\n")
+            print("\n Performance Report:\n")
             report = self.agent.get_performance_report()
             
             summary = report["evaluator_summary"]
@@ -171,7 +171,7 @@ class RAGChatbot:
                     print(f"   {metric}: {score:.2f}")
         
         elif cmd == '/linkedin':
-            print("\n✍️  Generating LinkedIn post...\n")
+            print("\n  Generating LinkedIn post...\n")
             analysis = self.agent.analyze_self()
             post = analysis["linkedin_post"]
             
@@ -183,8 +183,8 @@ class RAGChatbot:
             output_file = "linkedin_post.txt"
             with open(output_file, 'w') as f:
                 f.write(post)
-            print(f"\n💾 Post saved to: {output_file}")
+            print(f"\n Post saved to: {output_file}")
         
         else:
-            print(f"❌ Unknown command: {cmd}")
+            print(f" Unknown command: {cmd}")
             print("Available commands: /agent, /analyze, /report, /linkedin")

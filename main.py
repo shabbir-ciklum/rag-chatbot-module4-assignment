@@ -120,7 +120,7 @@ def main():
     # Create agent if enabled
     agent = None
     if args.agent_mode or args.self_analyze:
-        print("\n🚀 Initializing AI Agent...")
+        print("\n Initializing AI Agent...")
         agent = AIAgent(
             rag_retriever=retriever,
             llm_provider=llm,
@@ -136,33 +136,33 @@ def main():
     # Handle self-analysis mode
     if args.self_analyze:
         print("\n" + "="*70)
-        print("🔍 Self-Analysis Mode")
+        print(" Self-Analysis Mode")
         print("="*70)
         
         analysis = agent.analyze_self()
         
         # Display results
-        print("\n📊 Project Statistics:")
+        print("\n Project Statistics:")
         stats = analysis["stats"]
         print(f"   Total Files: {stats['total_files']}")
         print(f"   Python Files: {stats['python_files']}")
         print(f"   Total Lines: {stats['total_lines']:,}")
         print(f"   Test Files: {stats['test_files']}")
         
-        print("\n🏗️  Architecture Analysis:")
+        print("\n  Architecture Analysis:")
         arch = analysis["architecture"]
         print(f"   Type: {arch['architecture_type']}")
         print(f"   Layers: {len(arch['layers'])}")
         for layer, info in arch["layers"].items():
             print(f"      • {layer}: {info['purpose']}")
         
-        print("\n💻 Code Analysis:")
+        print("\n Code Analysis:")
         code = analysis["code_analysis"]
         print(f"   Total Classes: {code['total_classes']}")
         print(f"   Total Functions: {code['total_functions']}")
         print(f"   Files Analyzed: {len(code['files_analyzed'])}")
         
-        print("\n✍️  Generated LinkedIn Post:")
+        print("\n  Generated LinkedIn Post:")
         print("="*70)
         print(analysis["linkedin_post"])
         print("="*70)
@@ -171,14 +171,14 @@ def main():
         post_file = "linkedin_post.txt"
         with open(post_file, 'w') as f:
             f.write(analysis["linkedin_post"])
-        print(f"\n💾 LinkedIn post saved to: {post_file}")
+        print(f"\n LinkedIn post saved to: {post_file}")
         
         # Save full analysis
         import json
         analysis_file = "reports/self_analysis.json"
         with open(analysis_file, 'w') as f:
             json.dump(analysis, f, indent=2)
-        print(f"💾 Full analysis saved to: {analysis_file}")
+        print(f" Full analysis saved to: {analysis_file}")
         
         return
     
@@ -189,8 +189,8 @@ def main():
     
     test_questions = [
         "What are top threats in Agentic AI based solutions to look out for?",
-        "Summarise the top controls outlined in CIS benchmark guide v8.1.2?",
-        "What is new with Q business from latest AWS Summit London 2025 ?"
+        "Summarise the controls outlined in CIS benchmark guide v8.1.2?",
+        "Explain what are some highlighted features in Amazon Q?"
     ]
     
     for i, question in enumerate(test_questions, 1):
@@ -220,7 +220,7 @@ def main():
         
         if args.agent_mode and result.get("evaluation"):
             eval_data = result["evaluation"]
-            print(f"\n📊 Evaluation: Overall Score = {eval_data['overall_score']:.2f}")
+            print(f"\n Evaluation: Overall Score = {eval_data['overall_score']:.2f}")
     
     # Interactive mode
     print("\n" + "="*70)
@@ -229,7 +229,7 @@ def main():
     # Final performance report if agent was used
     if agent:
         print("\n" + "="*70)
-        print("📈 Final Performance Report")
+        print(" Final Performance Report")
         print("="*70)
         
         report = agent.get_performance_report()
@@ -244,7 +244,7 @@ def main():
                 print(f"   {metric}: {score:.2f}")
         
         # Export reports
-        print("\n💾 Exporting detailed reports...")
+        print("\n Exporting detailed reports...")
         files = agent.export_full_report()
         for file in files:
             print(f"   ✓ {file}")

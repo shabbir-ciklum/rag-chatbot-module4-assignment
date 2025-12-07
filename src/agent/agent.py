@@ -64,12 +64,12 @@ class AIAgent:
         }
         
         print(f"\n{'='*70}")
-        print(f"🤖 Agent Processing Query")
+        print(f" Agent Processing Query")
         print(f"{'='*70}")
         print(f"Query: {query}\n")
         
         # Step 1: Reason about the query
-        print("💭 Step 1: Reasoning...")
+        print(" Step 1: Reasoning...")
         retrieved_docs = self.rag_retriever.retrieve(query)
         context = {"retrieved_docs": retrieved_docs}
         
@@ -81,7 +81,7 @@ class AIAgent:
         print(f"   → Confidence: {reasoning['confidence']:.2f}")
         
         # Step 2: Execute RAG retrieval
-        print("\n📚 Step 2: Retrieving relevant information...")
+        print("\n Step 2: Retrieving relevant information...")
         interaction["retrieval_results"] = retrieved_docs
         
         if retrieved_docs:
@@ -91,7 +91,7 @@ class AIAgent:
             print("   → No documents retrieved")
         
         # Step 3: Execute required tools
-        print("\n🔧 Step 3: Executing tools...")
+        print("\n Step 3: Executing tools...")
         tool_results = self._execute_tools(reasoning["required_tools"])
         interaction["tool_results"] = tool_results
         
@@ -103,7 +103,7 @@ class AIAgent:
             print("   → No tools executed")
         
         # Step 4: Generate response
-        print("\n✍️  Step 4: Generating response...")
+        print("\n  Step 4: Generating response...")
         response = self._generate_response(
             query=query,
             retrieved_context=retrieved_docs,
@@ -115,7 +115,7 @@ class AIAgent:
         
         # Step 5: Self-reflection (if enabled)
         if use_reflection:
-            print("\n🪞 Step 5: Performing self-reflection...")
+            print("\n Step 5: Performing self-reflection...")
             reflection = self.reasoner.reflect_on_response(
                 query=query,
                 response=response,
@@ -137,7 +137,7 @@ class AIAgent:
                 interaction["response"] = response
         
         # Step 6: Evaluate performance
-        print("\n📊 Step 6: Evaluating performance...")
+        print("\n Step 6: Evaluating performance...")
         evaluation = self.evaluator.evaluate_overall_performance(
             query=query,
             response=response,
@@ -276,7 +276,7 @@ class AIAgent:
             Dictionary with self-analysis results
         """
         print(f"\n{'='*70}")
-        print(f"🔍 Agent Self-Analysis Mode")
+        print(f" Agent Self-Analysis Mode")
         print(f"{'='*70}\n")
         
         analysis = {
@@ -288,19 +288,19 @@ class AIAgent:
         }
         
         # Analyze own code
-        print("📝 Analyzing codebase...")
+        print(" Analyzing codebase...")
         analysis["code_analysis"] = self.tools.analyze_code()
         
         # Analyze architecture
-        print("🏗️  Analyzing architecture...")
+        print("  Analyzing architecture...")
         analysis["architecture"] = self.tools.analyze_architecture()
         
         # Get statistics
-        print("📊 Gathering statistics...")
+        print(" Gathering statistics...")
         analysis["stats"] = self.tools.get_project_stats()
         
         # Generate LinkedIn post
-        print("✍️  Generating LinkedIn post...")
+        print("  Generating LinkedIn post...")
         context = {
             "code_analysis": analysis["code_analysis"],
             "stats": analysis["stats"]
