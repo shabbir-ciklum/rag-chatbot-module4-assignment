@@ -40,10 +40,10 @@ graph LR
 
     VectorDB -->|Metadata| Metadata[📋 Metadata<br/>source, page, timestamp]
 
-    classDef source fill:#e0f2fe,stroke:#0369a1,stroke-width:2px
-    classDef loader fill:#ddd6fe,stroke:#7c3aed,stroke-width:2px
-    classDef process fill:#fef3c7,stroke:#d97706,stroke-width:2px
-    classDef store fill:#d1fae5,stroke:#059669,stroke-width:2px
+    classDef source fill:#4A90E2,stroke:#2E5C8A,stroke-width:2px,color:#fff
+    classDef loader fill:#9B59B6,stroke:#6C3483,stroke-width:2px,color:#fff
+    classDef process fill:#F39C12,stroke:#B8730D,stroke-width:2px,color:#000
+    classDef store fill:#27AE60,stroke:#1E8449,stroke-width:2px,color:#fff
 
     class PDF,Audio source
     class PDFLoader,AudioLoader loader
@@ -94,11 +94,11 @@ graph TD
 
     FinalResponse --> User[👤 User]
 
-    classDef input fill:#bfdbfe,stroke:#1e40af,stroke-width:2px
-    classDef embed fill:#fef3c7,stroke:#d97706,stroke-width:2px
-    classDef retrieve fill:#d1fae5,stroke:#059669,stroke-width:2px
-    classDef llm fill:#fbcfe8,stroke:#be185d,stroke-width:2px
-    classDef output fill:#e9d5ff,stroke:#7c3aed,stroke-width:2px
+    classDef input fill:#5DADE2,stroke:#2874A6,stroke-width:2px,color:#fff
+    classDef embed fill:#F39C12,stroke:#B8730D,stroke-width:2px,color:#000
+    classDef retrieve fill:#27AE60,stroke:#1E8449,stroke-width:2px,color:#fff
+    classDef llm fill:#E74C3C,stroke:#C0392B,stroke-width:2px,color:#fff
+    classDef output fill:#9B59B6,stroke:#6C3483,stroke-width:2px,color:#fff
 
     class Query,User input
     class QueryProcessor,EmbedQuery embed
@@ -166,11 +166,11 @@ graph TD
 
     FinalResponse --> UserOutput[👤 User]
 
-    classDef agent fill:#3b82f6,stroke:#1e40af,stroke-width:3px,color:#fff
-    classDef reasoning fill:#f59e0b,stroke:#d97706,stroke-width:2px
-    classDef execution fill:#10b981,stroke:#059669,stroke-width:2px
-    classDef reflection fill:#ec4899,stroke:#be185d,stroke-width:2px
-    classDef output fill:#eab308,stroke:#ca8a04,stroke-width:2px
+    classDef agent fill:#2E86C1,stroke:#1B4F72,stroke-width:3px,color:#fff
+    classDef reasoning fill:#F39C12,stroke:#B8730D,stroke-width:2px,color:#000
+    classDef execution fill:#27AE60,stroke:#1E8449,stroke-width:2px,color:#fff
+    classDef reflection fill:#E74C3C,stroke:#C0392B,stroke-width:2px,color:#fff
+    classDef output fill:#AF7AC5,stroke:#76448A,stroke-width:2px,color:#fff
 
     class Agent agent
     class Reasoner,R1,R2,R3,R4 reasoning
@@ -249,9 +249,9 @@ graph TD
 
     CodeReport & ArchReport & StatsReport & Docs & Post -->|Return to| Agent
 
-    classDef agent fill:#3b82f6,stroke:#1e40af,stroke-width:2px,color:#fff
-    classDef tools fill:#a855f7,stroke:#7e22ce,stroke-width:2px,color:#fff
-    classDef output fill:#10b981,stroke:#059669,stroke-width:2px
+    classDef agent fill:#2E86C1,stroke:#1B4F72,stroke-width:2px,color:#fff
+    classDef tools fill:#9B59B6,stroke:#6C3483,stroke-width:2px,color:#fff
+    classDef output fill:#27AE60,stroke:#1E8449,stroke-width:2px,color:#fff
 
     class Agent,ToolRegistry agent
     class T1,T2,T3,T4,T5 tools
@@ -317,10 +317,10 @@ graph TD
 
     RTReport & SessionReport & HistReport -->|Export| Files[💾 Export Files<br/>logs/ & reports/]
 
-    classDef input fill:#bfdbfe,stroke:#1e40af,stroke-width:2px
-    classDef process fill:#fef3c7,stroke:#d97706,stroke-width:2px
-    classDef metrics fill:#ec4899,stroke:#be185d,stroke-width:2px
-    classDef output fill:#d1fae5,stroke:#059669,stroke-width:2px
+    classDef input fill:#5DADE2,stroke:#2874A6,stroke-width:2px,color:#fff
+    classDef process fill:#F39C12,stroke:#B8730D,stroke-width:2px,color:#000
+    classDef metrics fill:#E74C3C,stroke:#C0392B,stroke-width:2px,color:#fff
+    classDef output fill:#27AE60,stroke:#1E8449,stroke-width:2px,color:#fff
 
     class Interaction,InteractionData input
     class Logger,Evaluator,OverallScore process
@@ -402,9 +402,9 @@ graph LR
     OEndpoint & GEndpoint & GemEndpoint -->|Response| Interface
     Interface -->|Return| Agent
 
-    classDef interface fill:#3b82f6,stroke:#1e40af,stroke-width:2px,color:#fff
-    classDef provider fill:#10b981,stroke:#059669,stroke-width:2px
-    classDef config fill:#fef3c7,stroke:#d97706,stroke-width:2px
+    classDef interface fill:#2E86C1,stroke:#1B4F72,stroke-width:2px,color:#fff
+    classDef provider fill:#27AE60,stroke:#1E8449,stroke-width:2px,color:#fff
+    classDef config fill:#F39C12,stroke:#B8730D,stroke-width:2px,color:#000
 
     class Agent,Interface,ProviderFactory interface
     class Ollama,Groq,Gemini provider
@@ -489,11 +489,11 @@ graph TB
     ExportReports --> End
     SkipReports --> End
 
-    classDef start fill:#d1fae5,stroke:#059669,stroke-width:2px
-    classDef init fill:#bfdbfe,stroke:#1e40af,stroke-width:2px
-    classDef process fill:#fef3c7,stroke:#d97706,stroke-width:2px
-    classDef agent fill:#e9d5ff,stroke:#7c3aed,stroke-width:2px
-    classDef output fill:#fecaca,stroke:#dc2626,stroke-width:2px
+    classDef start fill:#27AE60,stroke:#1E8449,stroke-width:2px,color:#fff
+    classDef init fill:#5DADE2,stroke:#2874A6,stroke-width:2px,color:#fff
+    classDef process fill:#F39C12,stroke:#B8730D,stroke-width:2px,color:#000
+    classDef agent fill:#9B59B6,stroke:#6C3483,stroke-width:2px,color:#fff
+    classDef output fill:#E74C3C,stroke:#C0392B,stroke-width:2px,color:#fff
 
     class Start,End start
     class Init,Config,VectorStore,LLMProvider,Retriever,Chatbot init
