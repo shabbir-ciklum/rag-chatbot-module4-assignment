@@ -188,9 +188,9 @@ def main():
     print("="*70)
     
     test_questions = [
-        "What are top threats in Agentic AI based solutions to look out for?",
-        "Summarise the controls outlined in CIS benchmark guide v8.1.2?",
-        "Explain what are some highlighted features in Amazon Q?"
+        "What are the production 'Do's' for RAG?",
+        "What is the difference between standard retrieval and the ColPali approach??",
+        "Why is hybrid search better than vector-only search?"
     ]
     
     for i, question in enumerate(test_questions, 1):
